@@ -18,10 +18,12 @@ const HomePage: React.FC = () => {
   return (
     <div className="flex-col space-y-20  justify-center">
       <Hero />
+      <Projects />
       <ProjectsGrid />
       {/* <ProjectsLayout /> for later*/} 
-      {/* <Testimonial />  */}
-      <Projects />
+      
+      <Testimonial /> 
+      {/* <Projects /> */}
       {/* <Services />  for later*/}
       <Info /> 
       <Faq items={Faqs}/>

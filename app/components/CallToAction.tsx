@@ -10,10 +10,11 @@ export const CallToAction: React.FC = () => {
     <div id="contact" className="flex flex-col md:flex-row items-center justify-between px-8 pb-40 md:p-16 bg-white ">
       <div className="text-center md:text-left md:ml-40 max-w-lg">
         <h2 className="md:text-6xl text-3xl font-bold text-black mb-4">
-          Transform Your Ideas into Reality
+          On-Demand Interviews
         </h2>
         <p className="text-xl text-gray-700 md:mt-10">
-          Let&apos;s create something unique together. Book a call with us today!
+          Cut coordination time, boost evaluation accuracy, and hire with confidence.
+          Start using RecriX today.
         </p>
       </div>
       <div className="mt-8 md:mt-0 md:ml-8 md:mr-52">
