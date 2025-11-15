@@ -5,49 +5,48 @@ import { Tilt } from "react-tilt";
 
 const defaultOptions = {
   reverse: false,
-  max: 30,
-  perspective: 2000,
-  scale: 1.05,
-  speed: 100,
+  max: 25,
+  perspective: 1800,
+  scale: 1.04,
+  speed: 800,
   transition: true,
-  axis: null,
   reset: true,
   easing: "cubic-bezier(.03,.98,.52,.99)",
 };
 
-// 🔄 Replaced testimonials with 4-step hiring workflow
+// 4-step refined hiring workflow
 const steps = [
   {
     id: 1,
     title: "Post Your Job",
     description:
-      "Upload job details and candidate CVs. RecriX instantly prepares structured interview criteria.",
+      "Add job details and candidate CVs. RecriX instantly generates structured interview criteria.",
     tag: "Step 1",
   },
   {
     id: 2,
     title: "Match With an Expert",
     description:
-      "Our AI pairs you with a verified domain interviewer from a 15,000+ global pool.",
+      "Our AI pairs you with a verified domain interviewer from a global 15,000+ expert network.",
     tag: "Step 2",
   },
   {
     id: 3,
     title: "Run Secure Interviews",
     description:
-      "Live code tests, video verification, anti-cheat, structured questions — all automated.",
+      "AI-led questions, live coding, anti-cheat, video verification — fully automated.",
     tag: "Step 3",
   },
   {
     id: 4,
     title: "Receive AI Reports",
     description:
-      "Instant insights: candidate scoring, summaries, behavior analysis, and credibility index.",
+      "Structured scoring, behavior signals, credibility index, and full interview summary.",
     tag: "Step 4",
   },
 ];
 
-// Avatar strip stays for visual flare
+// Avatar group
 const people = [
   {
     id: 1,
@@ -81,57 +80,57 @@ const people = [
 
 const Testimonial = () => {
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gradient-to-b from-[#0A1F1A] to-[#071712]">
+      <div className="container mx-auto px-6">
 
         {/* Avatar Row */}
-        <div className="flex flex-row items-center justify-center mb-10 w-full">
+        <div className="flex flex-row items-center justify-center mb-12">
           <AnimatedTooltip items={people} />
         </div>
 
         {/* Heading */}
-        <h2 className="text-3xl font-bold mb-10 text-center text-teal-600">
-          How It Works
+        <h2 className="text-4xl font-extrabold mb-14 text-center bg-gradient-to-r from-teal-300 to-emerald-500 bg-clip-text text-transparent drop-shadow-md">
+          How RecriX Works
         </h2>
 
         {/* Step Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 py-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {steps.map((step) => (
-            <div key={step.id} className="w-full relative max-w-xs mx-auto">
-              <Tilt options={defaultOptions}>
-                <div className="absolute inset-0 h-full w-full bg-teal-900/60 transform scale-[0.80] rounded-full blur-3xl opacity-30" />
+            <Tilt options={defaultOptions} key={step.id}>
+              <div className="relative p-[1px] rounded-2xl bg-gradient-to-br from-teal-500/40 to-emerald-600/40 shadow-lg">
+                <div className="relative bg-[#0B2620] rounded-2xl p-7 h-full overflow-hidden group border border-teal-700/40">
 
-                <div
-                  className="relative shadow-[0_0_20px_rgba(0,128,128,0.4)] border border-teal-800 px-5 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start"
-                  style={{ backgroundColor: "#123F36" }} // deep teal green
-                >
-                  {/* Step Circle */}
-                  <div className="h-8 w-8 rounded-full flex items-center justify-center mb-4 border border-teal-400 bg-teal-600/20">
+                  {/* Glow Background */}
+                  <div className="absolute inset-0 opacity-5 group-hover:opacity-15 transition-all duration-500 bg-gradient-to-br from-teal-400 to-emerald-400 blur-2xl" />
+
+                  {/* Step Tag */}
+                  <div className="h-9 w-9 rounded-full flex items-center justify-center mb-5 
+                    border border-teal-400 bg-teal-500/20 shadow-inner">
                     <span className="text-teal-200 text-xs font-semibold">
                       {step.tag}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h1 className="font-bold text-lg text-white mb-3 relative z-50">
+                  <h3 className="font-bold text-xl text-white mb-3 tracking-wide">
                     {step.title}
-                  </h1>
+                  </h3>
 
                   {/* Description */}
-                  <p className="font-normal text-sm text-teal-200 mb-4 relative z-50 leading-relaxed">
+                  <p className="text-sm text-teal-200/90 leading-relaxed mb-6">
                     {step.description}
                   </p>
 
-                  {/* Button Tag */}
-                  <button className="border px-4 py-1 rounded-lg border-teal-500 text-teal-200 text-xs">
+                  {/* CTA */}
+                  <button className="px-4 py-1.5 rounded-lg text-xs border border-teal-400/70 text-teal-200 hover:bg-teal-600/20 transition-all">
                     Learn More
                   </button>
 
                   {/* Meteors */}
-                  <Meteors number={15} />
+                  <Meteors number={12} />
                 </div>
-              </Tilt>
-            </div>
+              </div>
+            </Tilt>
           ))}
         </div>
       </div>
