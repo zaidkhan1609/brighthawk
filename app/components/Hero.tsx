@@ -314,7 +314,7 @@ export const Hero: React.FC = () => {
               />
 
               <input
-                type="url"
+                type="text"
                 placeholder="LinkedIn Profile (optional)"
                 className="px-4 py-3 border border-gray-200 rounded-lg"
                 value={interviewerForm.linkedin}
