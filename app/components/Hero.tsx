@@ -318,9 +318,10 @@ export const Hero: React.FC = () => {
                 placeholder="LinkedIn Profile (optional)"
                 className="px-4 py-3 border border-gray-200 rounded-lg"
                 value={interviewerForm.linkedin}
-                onChange={(e) => setInterviewerForm({ ...interviewerForm, linkedin: e.target.value })}
+                onChange={(e) =>
+                  setInterviewerForm({ ...interviewerForm, linkedin: e.target.value })
+                }
               />
-
               <textarea
                 placeholder="Additional Notes (optional)"
                 className="px-4 py-3 border border-gray-200 rounded-lg"

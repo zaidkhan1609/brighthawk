@@ -18,31 +18,31 @@ const defaultOptions = {
 const steps = [
   {
     id: 1,
+    tag: "Step 1",
     title: "Post Your Job",
     description:
       "Add job details and candidate CVs. RecriX instantly generates structured interview criteria.",
-    tag: "Step 1",
   },
   {
     id: 2,
+    tag: "Step 2",
     title: "Match With an Expert",
     description:
       "Our AI pairs you with a verified domain interviewer from a global 15,000+ expert network.",
-    tag: "Step 2",
   },
   {
     id: 3,
+    tag: "Step 3",
     title: "Run Secure Interviews",
     description:
       "AI-led questions, live coding, anti-cheat, video verification — fully automated.",
-    tag: "Step 3",
   },
   {
     id: 4,
+    tag: "Step 4",
     title: "Receive AI Reports",
     description:
       "Structured scoring, behavior signals, credibility index, and full interview summary.",
-    tag: "Step 4",
   },
 ];
 
@@ -100,16 +100,13 @@ const Testimonial = () => {
               <div className="relative p-[1px] rounded-2xl bg-gradient-to-br from-teal-500/40 to-emerald-600/40 shadow-lg">
                 <div className="relative bg-[#0B2620] rounded-2xl p-7 h-full overflow-hidden group border border-teal-700/40">
 
+                  {/* Step Label (No bubble, just text) */}
+                  <p className="text-teal-300 text-xs font-semibold mb-3 tracking-wider opacity-80">
+                    {step.tag}
+                  </p>
+
                   {/* Glow Background */}
                   <div className="absolute inset-0 opacity-5 group-hover:opacity-15 transition-all duration-500 bg-gradient-to-br from-teal-400 to-emerald-400 blur-2xl" />
-
-                  {/* Step Tag */}
-                  <div className="h-9 w-9 rounded-full flex items-center justify-center mb-5 
-                    border border-teal-400 bg-teal-500/20 shadow-inner">
-                    <span className="text-teal-200 text-xs font-semibold">
-                      {step.tag}
-                    </span>
-                  </div>
 
                   {/* Title */}
                   <h3 className="font-bold text-xl text-white mb-3 tracking-wide">

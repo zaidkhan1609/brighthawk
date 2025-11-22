@@ -17,13 +17,14 @@ import { motion } from "framer-motion";
 export default function BentoGridThirdDemo() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-16">
+
       {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">
           Comparison:
           <span className="ml-2 text-teal-600">RecriX</span>
           <span className="mx-2 text-slate-400">vs</span>
-          <span className="text-gray-700">Traditional Hiring</span>
+          <span className="text-gray-700">Other Companies</span>
         </h2>
 
         <p className="mt-3 text-sm text-slate-600 max-w-2xl mx-auto">
@@ -39,14 +40,39 @@ export default function BentoGridThirdDemo() {
         transition={{ duration: 0.6 }}
         className="bg-white rounded-2xl shadow-lg ring-1 ring-slate-100 p-6"
       >
-        {/* Comparison table */}
-        <div className="overflow-x-auto">
+
+        {/* ================= MOBILE VERSION ================= */}
+        <div className="block md:hidden space-y-4">
+          {comparisonRows.map((row) => (
+            <div
+              key={row.aspect}
+              className="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm"
+            >
+              <p className="text-sm font-semibold text-slate-900 mb-2">
+                {row.aspect}
+              </p>
+
+              <div className="mb-2">
+                <p className="text-xs font-bold text-teal-600">RecriX</p>
+                <p className="text-sm text-slate-700 mt-1">{row.recrix}</p>
+              </div>
+
+              <div>
+                <p className="text-xs font-bold text-slate-500">Other Companies</p>
+                <p className="text-sm text-slate-600 mt-1">{row.traditional}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ================= DESKTOP TABLE ================= */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="bg-slate-50">
                 <th className="text-left py-3 px-4 text-slate-700 font-medium">Aspect</th>
                 <th className="text-left py-3 px-4 text-slate-700 font-medium">RecriX</th>
-                <th className="text-left py-3 px-4 text-slate-700 font-medium">Traditional</th>
+                <th className="text-left py-3 px-4 text-slate-700 font-medium">Other Companies</th>
               </tr>
             </thead>
 
@@ -261,7 +287,6 @@ const items = [
     icon: <IconUserCheck className="h-5 w-5 text-teal-600" />,
   },
 
-  /* NEW CARD: Faster Payouts */
   {
     title: <span className="text-teal-700 font-semibold">Faster Payouts</span>,
     description: (
