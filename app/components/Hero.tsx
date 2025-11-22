@@ -7,8 +7,12 @@ import Particles from "react-tsparticles";
 import type { Engine, Container } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
 
+// ⬅️ Added FloatingNav import (correct path)
+import { FloatingNav } from "./ui/floating-navbar";
+
 export const Hero: React.FC = () => {
   const ref = useRef<HTMLElement | null>(null);
+
   const [openModal, setOpenModal] = useState(false); // Waitlist modal
   const [openInterviewerModal, setOpenInterviewerModal] = useState(false); // Interviewer modal
 
@@ -37,9 +41,7 @@ export const Hero: React.FC = () => {
     await loadSlim(engine);
   };
 
-  const particlesLoaded = async (container?: Container) => {
-    /* noop */
-  };
+  const particlesLoaded = async (container?: Container) => {};
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,12 +99,21 @@ export const Hero: React.FC = () => {
 
   return (
     <>
+      {/* ================= NAVBAR (Now correctly hooked to modal) ================= */}
+      <FloatingNav
+        navItems={[
+          { name: "RecriX", link: "/" },
+          { name: "About", link: "#about" },
+          { name: "Contact us", link: "#contact" },
+        ]}
+        onOpenWaitlist={() => setOpenModal(true)} // ⬅️ THIS MAKES THE NAV BUTTON OPEN THE SAME MODAL
+      />
+
       {/* ================= HERO SECTION ================= */}
       <section
         ref={ref}
         className="relative overflow-hidden min-h-screen bg-gradient-to-b from-white via-emerald-50 to-emerald-100"
       >
-        {/* Particles: preserved from first code (interactive & repulse on hover) */}
         <Particles
           id="tsparticles"
           init={particlesInit}
@@ -143,10 +154,10 @@ export const Hero: React.FC = () => {
           className="absolute inset-0 z-0"
         />
 
-        {/* ================= HERO CONTENT (with first-code animations kept) ================= */}
+        {/* ================= HERO CONTENT ================= */}
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 40 }} // heading slide-up preserved from first code
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
             viewport={{ once: true }}
@@ -181,7 +192,7 @@ export const Hero: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* === Animated Hero Images (fade & slide from first code) === */}
+        {/* Animated images */}
         <motion.div
           className="absolute bottom-0 left-0 mb-6 ml-8 opacity-90 hidden md:block"
           initial={{ opacity: 0, y: 20 }}
@@ -310,7 +321,9 @@ export const Hero: React.FC = () => {
                 className="px-4 py-3 border border-gray-200 rounded-lg"
                 required
                 value={interviewerForm.experience}
-                onChange={(e) => setInterviewerForm({ ...interviewerForm, experience: e.target.value })}
+                onChange={(e) =>
+                  setInterviewerForm({ ...interviewerForm, experience: e.target.value })
+                }
               />
 
               <input
@@ -322,6 +335,7 @@ export const Hero: React.FC = () => {
                   setInterviewerForm({ ...interviewerForm, linkedin: e.target.value })
                 }
               />
+
               <textarea
                 placeholder="Additional Notes (optional)"
                 className="px-4 py-3 border border-gray-200 rounded-lg"
