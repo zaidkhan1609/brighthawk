@@ -7,6 +7,7 @@ import Particles from "react-tsparticles";
 import type { Engine, Container } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
 
+import { IconHome, IconUser, IconMessage } from "@tabler/icons-react";  // ✅ ADDED
 import { FloatingNav } from "./ui/floating-navbar";
 
 export const Hero: React.FC = () => {
@@ -104,12 +105,24 @@ export const Hero: React.FC = () => {
 
   return (
     <>
-      {/* 🔥 NAVBAR */}
+      {/* 🔥 NAVBAR WITH ICONS ADDED */}
       <FloatingNav
         navItems={[
-          { name: "RecriX", link: "/" },
-          { name: "About", link: "#about" },
-          { name: "Contact us", link: "#contact" },
+          {
+            name: "RecriX",
+            link: "/",
+            icon: <IconHome className="h-4 w-4 text-neutral-500" />,
+          },
+          {
+            name: "About",
+            link: "#about",
+            icon: <IconUser className="h-4 w-4 text-neutral-500" />,
+          },
+          {
+            name: "Contact us",
+            link: "#contact",
+            icon: <IconMessage className="h-4 w-4 text-neutral-500" />,
+          },
         ]}
         onOpenWaitlist={() => setOpenModal(true)}
       />
@@ -166,10 +179,11 @@ export const Hero: React.FC = () => {
             <p className="max-w-3xl text-lg md:text-2xl text-gray-700 leading-relaxed">
               Outsource interviews to verified professionals.
               <br />
-              RecriX handles scheduling, secure video interviews, anti-cheat, and AI-generated reports — all in one platform.
+              RecriX handles scheduling, secure video interviews, anti-cheat, and AI-generated reports —
+              all in one platform.
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA BUTTONS */}
             <div className="flex flex-col sm:flex-row gap-4 mt-6">
               <button
                 onClick={() => setOpenModal(true)}
@@ -189,18 +203,32 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* IMAGES */}
-        <motion.div className="absolute bottom-0 left-0 mb-6 ml-8 hidden md:block"
+        <motion.div
+          className="absolute bottom-0 left-0 mb-6 ml-8 hidden md:block"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <Image src="/hero_image1.png" alt="AI Interview Analytics" width={220} height={220} className="rounded-xl" />
+          <Image
+            src="/hero_image1.png"
+            alt="AI Interview Analytics"
+            width={220}
+            height={220}
+            className="rounded-xl"
+          />
         </motion.div>
 
-        <motion.div className="absolute bottom-0 right-0 mb-6 mr-8 hidden md:block"
+        <motion.div
+          className="absolute bottom-0 right-0 mb-6 mr-8 hidden md:block"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <Image src="/hero_image2.png" alt="Candidate Matching Visualization" width={260} height={260} className="rounded-xl" />
+          <Image
+            src="/hero_image2.png"
+            alt="Candidate Matching Visualization"
+            width={260}
+            height={260}
+            className="rounded-xl"
+          />
         </motion.div>
       </section>
 
@@ -216,7 +244,10 @@ export const Hero: React.FC = () => {
               Join the RecriX Waitlist
             </h2>
 
-            <form onSubmit={handleWaitlistSubmit} className="flex flex-col gap-4">
+            <form
+              onSubmit={handleWaitlistSubmit}
+              className="flex flex-col gap-4"
+            >
               <input
                 type="text"
                 placeholder="Full Name"
@@ -239,7 +270,10 @@ export const Hero: React.FC = () => {
                 }
               />
 
-              <button type="submit" className="w-full py-3 bg-emerald-600 text-white rounded-lg">
+              <button
+                type="submit"
+                className="w-full py-3 bg-emerald-600 text-white rounded-lg"
+              >
                 Join Waitlist
               </button>
             </form>
@@ -266,43 +300,82 @@ export const Hero: React.FC = () => {
               Become a RecriX Interviewer
             </h2>
 
-            <form onSubmit={handleInterviewerSubmit} className="flex flex-col gap-4">
-              <input type="text" required placeholder="Full Name" className="px-4 py-3 border rounded-lg"
+            <form
+              onSubmit={handleInterviewerSubmit}
+              className="flex flex-col gap-4"
+            >
+              <input
+                type="text"
+                required
+                placeholder="Full Name"
+                className="px-4 py-3 border rounded-lg"
                 value={interviewerForm.name}
                 onChange={(e) =>
-                  setInterviewerForm({ ...interviewerForm, name: e.target.value })
+                  setInterviewerForm({
+                    ...interviewerForm,
+                    name: e.target.value,
+                  })
                 }
               />
 
-              <input type="email" required placeholder="Work Email" className="px-4 py-3 border rounded-lg"
+              <input
+                type="email"
+                required
+                placeholder="Work Email"
+                className="px-4 py-3 border rounded-lg"
                 value={interviewerForm.email}
                 onChange={(e) =>
-                  setInterviewerForm({ ...interviewerForm, email: e.target.value })
+                  setInterviewerForm({
+                    ...interviewerForm,
+                    email: e.target.value,
+                  })
                 }
               />
 
-              <input type="text" required placeholder="Skills" className="px-4 py-3 border rounded-lg"
+              <input
+                type="text"
+                required
+                placeholder="Skills"
+                className="px-4 py-3 border rounded-lg"
                 value={interviewerForm.skills}
                 onChange={(e) =>
-                  setInterviewerForm({ ...interviewerForm, skills: e.target.value })
+                  setInterviewerForm({
+                    ...interviewerForm,
+                    skills: e.target.value,
+                  })
                 }
               />
 
-              <input type="number" required placeholder="Experience" className="px-4 py-3 border rounded-lg"
+              <input
+                type="number"
+                required
+                placeholder="Experience"
+                className="px-4 py-3 border rounded-lg"
                 value={interviewerForm.experience}
                 onChange={(e) =>
-                  setInterviewerForm({ ...interviewerForm, experience: e.target.value })
+                  setInterviewerForm({
+                    ...interviewerForm,
+                    experience: e.target.value,
+                  })
                 }
               />
 
-              <textarea placeholder="Notes (optional)" className="px-4 py-3 border rounded-lg"
+              <textarea
+                placeholder="Notes (optional)"
+                className="px-4 py-3 border rounded-lg"
                 value={interviewerForm.notes}
                 onChange={(e) =>
-                  setInterviewerForm({ ...interviewerForm, notes: e.target.value })
+                  setInterviewerForm({
+                    ...interviewerForm,
+                    notes: e.target.value,
+                  })
                 }
               />
 
-              <button type="submit" className="w-full py-3 bg-emerald-600 text-white rounded-lg">
+              <button
+                type="submit"
+                className="w-full py-3 bg-emerald-600 text-white rounded-lg"
+              >
                 Submit Application
               </button>
             </form>
