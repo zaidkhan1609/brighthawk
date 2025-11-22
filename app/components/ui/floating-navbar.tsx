@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import {
   motion,
@@ -10,7 +11,7 @@ import { cn } from "@/utils/cn";
 
 export const FloatingNav = ({
   navItems,
-  onOpenWaitlist,        // ⬅ NEW PROP
+  onOpenWaitlist,
   className,
 }: {
   navItems: {
@@ -18,7 +19,7 @@ export const FloatingNav = ({
     link: string;
     icon?: JSX.Element;
   }[];
-  onOpenWaitlist: () => void;   // ⬅ NEW PROP TYPE
+  onOpenWaitlist: () => void;
   className?: string;
 }) => {
   const { scrollYProgress } = useScroll();
@@ -29,7 +30,7 @@ export const FloatingNav = ({
       if (current === 0) {
         setVisible(true);
       } else {
-        let direction = current - scrollYProgress.getPrevious()!;
+        const direction = current - scrollYProgress.getPrevious()!;
         if (scrollYProgress.get() < 0.05) {
           setVisible(false);
         } else {
@@ -61,9 +62,9 @@ export const FloatingNav = ({
           </a>
         ))}
 
-        {/* Updated Teal Waitlist Button */}
+        {/* Waitlist Button */}
         <button
-          onClick={onOpenWaitlist}    // ⬅ CALLS HERO MODAL
+          onClick={onOpenWaitlist}
           className="border text-sm font-medium relative border-teal-500 text-teal-700 px-4 py-2 rounded-full 
                      hover:bg-teal-600 hover:text-white transition-colors duration-200"
         >
