@@ -10,35 +10,35 @@ const showcaseItems = [
     title: "AI-Powered Candidate Journey",
     description:
       "Track every step — effortlessly. From application to final decision, RecriX visualizes each stage with AI insights, signals, documents, and interview progress in one clean dashboard.",
-    image: "/landing-ui/ui1.png",
+    image: "/landing-ui/ui1.webp",
   },
   {
     id: 2,
     title: "Live Interview Workspace",
     description:
       "Everything interviewers need — in one screen. Live video, coding editor, auto notes, AI questions, and real-time scoring to streamline every technical interview.",
-    image: "/landing-ui/ui2.png",
+    image: "/landing-ui/ui2.webp",
   },
   {
     id: 3,
     title: "Structured Interview Reports",
     description:
       "Beautiful, trustworthy reports — instantly generated. Get credibility scores, competency bars, behavior cues, tech proficiency, and skill gaps for confident hiring decisions.",
-    image: "/landing-ui/ui3.png",
+    image: "/landing-ui/ui3.webp",
   },
   {
     id: 4,
     title: "Smart Interviewer Matching",
     description:
       "Upload a job — get the best interviewer. RecriX automatically selects the ideal verified interviewer using skills, domain fit, and performance data.",
-    image: "/landing-ui/ui4.png",
+    image: "/landing-ui/ui4.webp",
   },
   {
     id: 5,
     title: "Deep AI-Driven Insights",
     description:
       "Uncover real skill and potential. Our AI analyzes coding ability, system design, communication, and patterns to deliver credibility scores and detailed gap analysis.",
-    image: "/landing-ui/ui5.png",
+    image: "/landing-ui/ui5.webp",
   },
 ];
 
@@ -53,39 +53,37 @@ export default function LandingShowcase() {
 
   return (
     <section className="w-full py-16 bg-white relative">
-      <h2 className="text-center text-3xl sm:text-4xl font-bold text-emerald-600 mb-10 sm:mb-12">
+      <h2 className="text-center text-3xl sm:text-4xl font-bold text-emerald-600 mb-12">
         What RecriX Can Do
       </h2>
 
-      <div className="w-full flex flex-col items-center px-4">
-        {/* Fixed Slide Container (prevents button jumping) */}
-        <div className="w-full max-w-5xl min-h-[520px] sm:min-h-[450px] flex items-center justify-center">
+      <div className="flex flex-col items-center w-full px-4">
+        {/* FIXED RESPONSIVE HEIGHT */}
+        <div className="w-full max-w-5xl min-h-[600px] sm:min-h-[520px] lg:min-h-[450px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, x: 40 }}
+              initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{
-                duration: 0.45,
-                ease: "easeOut",
-              }}
+              exit={{ opacity: 0, x: -60 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
               className="bg-white shadow-xl border border-emerald-100 rounded-2xl sm:rounded-3xl 
-                         p-6 sm:p-10 flex flex-col md:flex-row gap-8 sm:gap-10 items-center w-full"
+                         p-6 sm:p-10 flex flex-col md:flex-row gap-8 sm:gap-10 w-full items-center"
             >
-              {/* Image Wrapper – fixed aspect ratio */}
+              {/* FIXED IMAGE SIZE WRAPPER */}
               <div className="w-full md:w-1/2">
-                <div className="w-full aspect-[3/2] relative rounded-xl overflow-hidden shadow-lg">
+                <div className="w-full aspect-[4/3] relative rounded-xl overflow-hidden shadow-lg">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
+                    priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                   />
                 </div>
               </div>
 
-              {/* Text */}
               <div className="w-full md:w-1/2 text-center md:text-left">
                 <h3 className="text-2xl sm:text-3xl font-semibold text-emerald-700 mb-4">
                   {item.title}
@@ -98,18 +96,16 @@ export default function LandingShowcase() {
           </AnimatePresence>
         </div>
 
-        {/* CENTERED BUTTONS (never move) */}
+        {/* CENTERED BUTTONS */}
         <div className="flex items-center justify-center space-x-6 mt-8">
           <button
             onClick={prev}
-            className="bg-emerald-600 text-white w-10 h-10 sm:w-12 sm:h-12 
-                       rounded-full shadow-md flex items-center justify-center 
-                       hover:bg-emerald-700 transition"
+            className="bg-emerald-600 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full 
+                       shadow-md hover:bg-emerald-700 transition"
           >
             ←
           </button>
 
-          {/* Dots */}
           <div className="flex space-x-2 sm:space-x-3">
             {showcaseItems.map((_, i) => (
               <button
@@ -124,9 +120,8 @@ export default function LandingShowcase() {
 
           <button
             onClick={next}
-            className="bg-emerald-600 text-white w-10 h-10 sm:w-12 sm:h-12 
-                       rounded-full shadow-md flex items-center justify-center 
-                       hover:bg-emerald-700 transition"
+            className="bg-emerald-600 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full 
+                       shadow-md hover:bg-emerald-700 transition"
           >
             →
           </button>
