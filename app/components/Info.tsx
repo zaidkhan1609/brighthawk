@@ -20,7 +20,19 @@ export default function BentoGridThirdDemo() {
 
       {/* Header */}
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">
+
+        {/* MOBILE VERSION (stacked) */}
+        <h2 className="text-3xl md:hidden font-extrabold text-slate-900 leading-tight">
+          <span>Comparison:</span>
+          <br />
+          <span className="text-teal-600">RecriX</span>
+          <span className="mx-1 text-slate-400">vs</span>
+          <br />
+          <span className="text-gray-700">Other Companies</span>
+        </h2>
+
+        {/* DESKTOP/TABLET VERSION (unchanged) */}
+        <h2 className="hidden md:block text-3xl md:text-4xl font-extrabold text-slate-900">
           Comparison:
           <span className="ml-2 text-teal-600">RecriX</span>
           <span className="mx-2 text-slate-400">vs</span>
@@ -41,7 +53,7 @@ export default function BentoGridThirdDemo() {
         className="bg-white rounded-2xl shadow-lg ring-1 ring-slate-100 p-6"
       >
 
-        {/* ================= MOBILE TABLE (REAL TABLE) ================= */}
+        {/* ================= MOBILE TABLE ================= */}
         <div className="block md:hidden overflow-x-auto rounded-xl border border-slate-200">
           <table className="min-w-[600px] w-full text-sm">
             <thead>
