@@ -1,24 +1,91 @@
+/* -------------------------------------------------- */
+/*  TAILWIND IMPORTS                                  */
+/* -------------------------------------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* -------------------------------------------------- */
+/*  GLOBAL RESETS                                     */
+/* -------------------------------------------------- */
 
-/* Add this to your global CSS */
-/* body {
-    overflow-x: hidden;
-  } */
-  
-  @keyframes rotateText {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  a {
-    text-decoration: none;
-  }
-  
- 
+/* Prevent horizontal scroll glitches */
+html, body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background: #ffffff;
+  color: #1f2937; /* gray-800 */
+  font-family: var(--font-sans, sans-serif);
+}
+
+/* Remove underline on all links (Tailwind can override) */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* -------------------------------------------------- */
+/*  CUSTOM ANIMATIONS                                 */
+/* -------------------------------------------------- */
+
+@keyframes rotateText {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Optional class usage: .animate-rotateText */
+.animate-rotateText {
+  animation: rotateText 20s linear infinite;
+}
+
+/* -------------------------------------------------- */
+/*  SCROLLBAR HIDING                                  */
+/* -------------------------------------------------- */
+
+/* Hide scrollbar (for horizontal scroll sections) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE / Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+
+/* -------------------------------------------------- */
+/*  UI POLISH                                          */
+/* -------------------------------------------------- */
+
+/* Smooth card shadow globally */
+.card-shadow {
+  box-shadow: 
+    0px 4px 10px rgba(0,0,0,0.06),
+    0px 1px 3px rgba(0,0,0,0.03);
+}
+
+/* Subtle hover lift effect */
+.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Buttons — lightweight default behavior */
+button {
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+/* -------------------------------------------------- */
+/*  TOUCH IMPROVEMENTS                                 */
+/* -------------------------------------------------- */
+
+/* iOS / Android smooth tap */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent accidental horizontal drag on mobile */
+section, div {
+  overscroll-behavior-x: none;
+}

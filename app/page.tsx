@@ -12,6 +12,7 @@ import ProjectsLayout from "./components/ProjectsLayout";
 import { CallToAction } from "./components/CallToAction";
 import { Faqs } from "./components/data/faqs"; // Adjust the import path accordingly
 import { ProjectsGrid } from "./components/ProjectsGrid";
+import LandingShowcase from "./components/LandingShowcase";
 
 
 const HomePage: React.FC = () => {
@@ -19,6 +20,7 @@ const HomePage: React.FC = () => {
     <div className="flex-col space-y-20  justify-center">
       <Hero />
       <Projects />
+      <LandingShowcase />
       <ProjectsGrid />
       {/* <ProjectsLayout /> for later*/} 
       
