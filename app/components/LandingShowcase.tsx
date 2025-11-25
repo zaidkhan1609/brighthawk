@@ -45,59 +45,52 @@ const showcaseItems = [
 export default function LandingShowcase() {
   const [index, setIndex] = useState(0);
 
-  const next = () => {
-    setIndex((prev) => (prev + 1) % showcaseItems.length);
-  };
-
-  const prev = () => {
+  const next = () => setIndex((prev) => (prev + 1) % showcaseItems.length);
+  const prev = () =>
     setIndex((prev) => (prev - 1 + showcaseItems.length) % showcaseItems.length);
-  };
 
   const item = showcaseItems[index];
 
   return (
-    <section className="w-full py-20 bg-white relative">
-      <h2 className="text-center text-4xl font-bold text-emerald-600 mb-12">
+    <section className="w-full py-16 bg-white relative">
+      <h2 className="text-center text-3xl sm:text-4xl font-bold text-emerald-600 mb-10 sm:mb-12">
         What RecriX Can Do
       </h2>
 
-      <div className="relative w-full flex justify-center items-center px-4">
-        {/* Left Button */}
-        <button
-          onClick={prev}
-          className="absolute left-4 md:left-12 bg-emerald-600 text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center hover:bg-emerald-700 transition"
-        >
-          ←
-        </button>
-
-        {/* Slide */}
-        <div className="w-full max-w-5xl">
+      <div className="w-full flex flex-col items-center px-4">
+        {/* Fixed Slide Container (prevents button jumping) */}
+        <div className="w-full max-w-5xl min-h-[520px] sm:min-h-[450px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, scale: 0.95, x: 50 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              exit={{ opacity: 0, scale: 0.95, x: -50 }}
-              transition={{ duration: 0.4 }}
-              className="bg-white shadow-xl border border-emerald-100 rounded-3xl p-10 flex flex-col md:flex-row gap-10 items-center"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{
+                duration: 0.45,
+                ease: "easeOut",
+              }}
+              className="bg-white shadow-xl border border-emerald-100 rounded-2xl sm:rounded-3xl 
+                         p-6 sm:p-10 flex flex-col md:flex-row gap-8 sm:gap-10 items-center w-full"
             >
-              {/* Image */}
-              <div className="w-full md:w-1/2 relative">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={600}
-                  height={400}
-                  className="rounded-xl shadow-lg object-cover"
-                />
+              {/* Image Wrapper – fixed aspect ratio */}
+              <div className="w-full md:w-1/2">
+                <div className="w-full aspect-[3/2] relative rounded-xl overflow-hidden shadow-lg">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
 
               {/* Text */}
-              <div className="w-full md:w-1/2">
-                <h3 className="text-3xl font-semibold text-emerald-700 mb-4">
+              <div className="w-full md:w-1/2 text-center md:text-left">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-emerald-700 mb-4">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -105,26 +98,39 @@ export default function LandingShowcase() {
           </AnimatePresence>
         </div>
 
-        {/* Right Button */}
-        <button
-          onClick={next}
-          className="absolute right-4 md:right-12 bg-emerald-600 text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center hover:bg-emerald-700 transition"
-        >
-          →
-        </button>
-      </div>
-
-      {/* Dots */}
-      <div className="flex justify-center mt-8 space-x-3">
-        {showcaseItems.map((_, i) => (
+        {/* CENTERED BUTTONS (never move) */}
+        <div className="flex items-center justify-center space-x-6 mt-8">
           <button
-            key={i}
-            onClick={() => setIndex(i)}
-            className={`h-3 w-3 rounded-full transition ${
-              index === i ? "bg-emerald-600" : "bg-emerald-300"
-            }`}
-          />
-        ))}
+            onClick={prev}
+            className="bg-emerald-600 text-white w-10 h-10 sm:w-12 sm:h-12 
+                       rounded-full shadow-md flex items-center justify-center 
+                       hover:bg-emerald-700 transition"
+          >
+            ←
+          </button>
+
+          {/* Dots */}
+          <div className="flex space-x-2 sm:space-x-3">
+            {showcaseItems.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full transition ${
+                  index === i ? "bg-emerald-600" : "bg-emerald-300"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={next}
+            className="bg-emerald-600 text-white w-10 h-10 sm:w-12 sm:h-12 
+                       rounded-full shadow-md flex items-center justify-center 
+                       hover:bg-emerald-700 transition"
+          >
+            →
+          </button>
+        </div>
       </div>
     </section>
   );
