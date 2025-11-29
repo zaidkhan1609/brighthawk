@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export const Faqs = [
   {
     title: "What is RecriX?",
@@ -48,5 +50,10 @@ export const Faqs = [
     title: "How do we get started?",
     content:
       "Simply contact the team, share your roles or job descriptions, and RecriX will set up your first automated interview pipeline.",
+  },
+  {
+    title: "What happens if I join the waitlist?",
+    content:
+      "You'll receive early access as soon as your invite becomes active. We're onboarding in controlled stages to keep performance high while gathering insight into what additional features could genuinely remove friction in hiring. Joining the waitlist helps shape the platform, gives you priority in testing new capabilities, and ensures your team benefits from improvements before they reach the wider audience.",
   },
 ];
