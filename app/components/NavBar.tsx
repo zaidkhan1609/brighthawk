@@ -16,8 +16,14 @@ export default function NavBar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Home");
   const [scrolled, setScrolled] = useState(false);
-  const [indicatorProps, setIndicatorProps] = useState({ left: 0, width: 0 });
-  const linksRef = useRef([]);
+
+  // Fix: Strictly typed refs
+  const linksRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const [indicatorProps, setIndicatorProps] = useState({
+    left: 0,
+    width: 0,
+  });
 
   // Scroll detection
   useEffect(() => {
@@ -28,11 +34,11 @@ export default function NavBar() {
       const sections = navLinks.filter(l => l.href.startsWith("#"));
 
       for (let sec of sections) {
-        const el = document.querySelector(sec.href);
+        const el = document.querySelector(sec.href) as HTMLElement | null;
         if (!el) continue;
 
-        const top = el.getBoundingClientRect().top + window.scrollY;
-        const bottom = top + el.clientHeight;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
 
         if (scrollPos >= top && scrollPos < bottom) {
           setActive(sec.label);
@@ -68,13 +74,14 @@ export default function NavBar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-        {/* TEXT LOGO (NO IMAGE) */}
+        {/* Logo */}
         <a href="/" className="text-2xl font-extrabold tracking-tight text-white">
           Bright<span className="text-orange-500">Hawk</span>
         </a>
 
-        {/* DESKTOP MENU */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10 relative">
+          
           {/* Underline Indicator */}
           <motion.div
             className="absolute bottom-[-4px] h-[2.5px] bg-orange-400 rounded-full"
@@ -88,8 +95,15 @@ export default function NavBar() {
           {navLinks.map((item, i) => (
             <button
               key={item.label}
-              ref={(el) => (linksRef.current[i] = el)}
-              onClick={() => setActive(item.label)}
+              ref={(el) => {
+                linksRef.current[i] = el;
+              }}
+              onClick={() => {
+                setActive(item.label);
+                if (item.href.startsWith("#")) {
+                  document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
               className={`
                 text-sm font-medium transition relative pb-1
                 ${active === item.label ? "text-orange-400" : "text-gray-200 hover:text-orange-300"}
@@ -100,7 +114,7 @@ export default function NavBar() {
           ))}
         </div>
 
-        {/* MOBILE MENU BUTTON */}
+        {/* Mobile menu button */}
         <button
           className="md:hidden text-white text-3xl"
           onClick={() => setOpen(!open)}
@@ -109,28 +123,30 @@ export default function NavBar() {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden backdrop-blur-xl bg-black/40 border-t border-white/10 px-6 py-4 space-y-3"
+            className="md:hidden backdrop-blur-xl bg-black/40 border-t border-white/10 px-6 py-4 space-y-4"
           >
             {navLinks.map((item) => (
               <button
                 key={item.label}
-                href={item.href}
+                onClick={() => {
+                  setActive(item.label);
+                  setOpen(false);
+                  if (item.href.startsWith("#")) {
+                    document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
                 className={`
-                  block text-lg py-2 w-full text-left
+                  block text-lg w-full text-left
                   ${active === item.label ? "text-orange-400" : "text-gray-200"}
                   hover:text-orange-300
                 `}
-                onClick={() => { 
-                  setActive(item.label);
-                  setOpen(false);
-                }}
               >
                 {item.label}
               </button>
