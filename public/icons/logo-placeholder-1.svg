@@ -1,0 +1,5 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40">
+  <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+  <rect width="120" height="40" rx="6" fill="none"/>
+  <text x="8" y="26" font-family="Inter, Arial" font-weight="700" font-size="18" fill="url(#lg)">BrightHawk</text>
+</svg>

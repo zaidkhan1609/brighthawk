@@ -1,38 +1,32 @@
-// pages/index.tsx
 "use client";
+
 import React from "react";
-import { Hero } from "./components/Hero";
-import { MovingBackgroundButton } from "../app/components/MovingBackgroundButton";
+
+import Hero from "./components/Hero";
+import WhoWeAre from "./components/WhoWeAre";
+import Services from "./components/Services";
+import Sectors from "./components/Sectors";
+import DevOpsSolutions from "./components/DevOpsSolutions";
+import WhyChooseUs from "./components/WhyChooseUs";
 import Testimonial from "./components/Testimonial";
-import Projects from  "./components/Projects";
 import Faq from "./components/FAQ";
-import Info from  "./components/Info";
-import Services from  "./components/Services";
-import ProjectsLayout from "./components/ProjectsLayout";
+import { Faqs } from "./components/data/faqs";
 import { CallToAction } from "./components/CallToAction";
-import { Faqs } from "./components/data/faqs"; // Adjust the import path accordingly
-import { ProjectsGrid } from "./components/ProjectsGrid";
-import LandingShowcase from "./components/LandingShowcase";
+// import Footer from "./components/Footer";
 
-
-const HomePage: React.FC = () => {
+export default function Page() {
   return (
-    <div className="flex-col space-y-20  justify-center">
+    <div className="flex-col justify-center bg-[#0a0a0a]">
       <Hero />
-      <Projects />
-      <LandingShowcase />
-      <ProjectsGrid />
-      {/* <ProjectsLayout /> for later*/} 
-      
-      <Testimonial /> 
-      {/* <Projects /> */}
-      {/* <Services />  for later*/}
-      <Info /> 
-      <Faq items={Faqs}/>
-      {/* <Contact /> for later*/}
+      <WhoWeAre />
+      <Services />
+      <Sectors />
+      <DevOpsSolutions />
+      <WhyChooseUs />
+      <Testimonial />
+      <Faq items={Faqs} />
       <CallToAction />
+      {/* <Footer /> */}
     </div>
   );
-};
-
-export default HomePage;
+}

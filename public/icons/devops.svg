@@ -1,0 +1,5 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><linearGradient id="ig" x1="0" x2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+  <rect x="6" y="18" width="52" height="28" rx="6" fill="url(#ig)"/>
+  <g fill="#fff"><circle cx="20" cy="32" r="4"/><rect x="28" y="28" width="8" height="8" rx="2"/></g>
+</svg>
