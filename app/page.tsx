@@ -25,7 +25,7 @@ export default function Page() {
       <WhyChooseUs />
       <Testimonial />
       <Faq items={Faqs} />
-      <CallToAction />
+      {/* <CallToAction /> */}
       {/* <Footer /> */}
     </div>
   );
