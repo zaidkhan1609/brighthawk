@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function WhoWeAre() {
   return (
-    <section className="relative py-36 bg-[#050505] overflow-hidden">
+    <section id="who-we-are" className="relative py-36 bg-[#050505] overflow-hidden">
 
       {/* Matching Glow Background */}
       <div className="absolute inset-0 pointer-events-none">

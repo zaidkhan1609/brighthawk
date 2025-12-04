@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#050505] py-40 text-white">
+    <section id="home" className="relative overflow-hidden bg-[#0a0a0a] py-32 text-white">
 
       {/* === Background Glow === */}
       <div className="absolute inset-0 pointer-events-none">

@@ -1,60 +1,189 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const solutions = [
   {
     title: "CI/CD Pipeline Automation",
     desc: "Automate build, test & deployment using Jenkins, GitLab & Azure DevOps.",
-    icon: "/icons/cicd.svg"
+    icon: "/icons/cicd.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          Automate and streamline your software delivery pipeline with modern DevOps tooling.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• Automated build, test, and deployment</li>
+          <li>• Zero-downtime releases</li>
+          <li>• Jenkins, GitHub Actions, GitLab CI</li>
+          <li>• Parallel pipelines for faster delivery</li>
+          <li>• Rollback & version control automation</li>
+        </ul>
+      </>
+    ),
   },
+
   {
     title: "Monitoring & Observability",
-    desc: "Real-time health & performance insights using Prometheus, Grafana & ELK.",
-    icon: "/icons/monitor.svg"
+    desc: "Real-time insights using Prometheus, Grafana & ELK.",
+    icon: "/icons/monitor.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          Monitor performance, logs, metrics, and system health in real time.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• Prometheus metrics + Grafana dashboards</li>
+          <li>• Centralized logging with ELK</li>
+          <li>• Alerting & on-call workflows</li>
+          <li>• SLO, SLA, and SLI tracking</li>
+        </ul>
+      </>
+    ),
   },
+
   {
     title: "Scalable Infrastructure Design",
-    desc: "High-performance systems with auto-scaling, load balancing & failover.",
-    icon: "/icons/scalable.svg"
+    desc: "Auto-scaling, load balancing & high availability.",
+    icon: "/icons/scalable.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          Build infrastructure that grows with your traffic and business demands.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• Auto-scaling groups</li>
+          <li>• High availability clusters</li>
+          <li>• Distributed system design</li>
+          <li>• Load balancing & failover routing</li>
+        </ul>
+      </>
+    ),
   },
+
   {
     title: "Cloud Infrastructure Management",
-    desc: "AWS, Azure, GCP expertise with IaC using Terraform & Ansible.",
-    icon: "/icons/cloud.svg"
+    desc: "AWS, Azure, GCP with Terraform & Ansible automation.",
+    icon: "/icons/cloud.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          End-to-end cloud management using IaC best practices.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• AWS, Azure, and Google Cloud</li>
+          <li>• Terraform, Pulumi, and Ansible automation</li>
+          <li>• Secure VPC + networking setup</li>
+          <li>• Cost optimization strategies</li>
+        </ul>
+      </>
+    ),
   },
+
   {
     title: "DevSecOps",
-    desc: "Security integrated in every stage with Snyk & Aqua Security.",
-    icon: "/icons/security.svg"
+    desc: "Security integrated throughout the pipeline.",
+    icon: "/icons/security.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          Security is embedded at every stage of the SDLC.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• SAST, DAST & dependency scanning</li>
+          <li>• Vulnerability reports</li>
+          <li>• Snyk, Aqua Security, Trivy</li>
+          <li>• Secrets & access management</li>
+        </ul>
+      </>
+    ),
   },
+
   {
     title: "Migration Services",
-    desc: "Seamless on-prem to cloud migration with minimal downtime.",
-    icon: "/icons/migration.svg"
+    desc: "Seamless on-prem to cloud migration.",
+    icon: "/icons/migration.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          Move from legacy systems to modern cloud with zero disruption.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• On-prem to AWS / Azure / GCP</li>
+          <li>• Database migration without downtime</li>
+          <li>• Refactoring monoliths</li>
+          <li>• Hybrid cloud configurations</li>
+        </ul>
+      </>
+    ),
   },
+
   {
     title: "Containerization & Orchestration",
-    desc: "Docker + Kubernetes for scalability & high availability.",
-    icon: "/icons/kubernetes.svg"
+    desc: "Docker + Kubernetes for high availability.",
+    icon: "/icons/kubernetes.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          Modern, scalable, and self-healing deployment platforms.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• Docker containerization</li>
+          <li>• Kubernetes orchestration</li>
+          <li>• Helm, ArgoCD, Flux CD</li>
+          <li>• Blue/green & canary deployments</li>
+        </ul>
+      </>
+    ),
   },
+
   {
     title: "Configuration Management",
-    desc: "Consistent environments using Chef, Puppet & Ansible.",
-    icon: "/icons/config.svg"
+    desc: "Standardized environments with Ansible & Puppet.",
+    icon: "/icons/config.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          Ensure consistent environments across all deployments.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• Ansible playbooks</li>
+          <li>• Puppet manifests</li>
+          <li>• Version-controlled infrastructure</li>
+          <li>• Automated provisioning</li>
+        </ul>
+      </>
+    ),
   },
+
   {
     title: "Incident Management & Support",
-    desc: "24/7 real-time monitoring & rapid issue resolution.",
-    icon: "/icons/support.svg"
+    desc: "24/7 monitoring & rapid issue resolution.",
+    icon: "/icons/support.svg",
+    details: (
+      <>
+        <p className="text-gray-300">
+          We ensure uptime and reliability through continuous monitoring.
+        </p>
+        <ul className="mt-4 space-y-2 text-gray-300">
+          <li>• 24/7 real-time monitoring</li>
+          <li>• Automated alert escalation</li>
+          <li>• On-call SRE teams</li>
+          <li>• Root cause analysis & prevention</li>
+        </ul>
+      </>
+    ),
   },
 ];
 
 export default function DevOpsSolutions() {
-  return (
-    <section className="relative py-32 bg-[#0a0a0a] overflow-hidden">
+  const [active, setActive] = useState<number | null>(null);
 
-      {/* GLOW BACKGROUND */}
+  return (
+    <section id="devops-solutions" className="py-28 relative bg-[#0a0a0a]">
+
+      {/* Background Glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 left-1/4 w-[30rem] h-[30rem] bg-gradient-to-br from-blue-600 to-indigo-600 blur-[180px] opacity-25"></div>
         <div className="absolute bottom-0 right-0 w-[32rem] h-[32rem] bg-gradient-to-br from-purple-600 to-pink-600 blur-[170px] opacity-30"></div>
@@ -70,7 +199,7 @@ export default function DevOpsSolutions() {
           className="text-4xl md:text-5xl font-bold text-white text-center"
         >
           DevOps-as-a-Service:{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-300">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
             What We Provide
           </span>
         </motion.h2>
@@ -82,41 +211,60 @@ export default function DevOpsSolutions() {
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              whileHover={{
-                scale: 1.04,
-                boxShadow: "0 0 25px rgba(0, 200, 255, 0.35)",
-              }}
+              whileHover={{ scale: 1.04 }}
               className="relative group rounded-lg p-[2px] bg-gradient-to-br from-gray-700 to-gray-900 cursor-pointer"
             >
-              {/* Neon hover glow */}
-              <div
-                className="absolute inset-0 rounded-lg blur-xl opacity-0 group-hover:opacity-30 transition duration-500 
-                bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
-              ></div>
+              {/* Glow */}
+              <div className="absolute inset-0 rounded-lg blur-xl opacity-0 group-hover:opacity-30 transition bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
 
-              {/* Inner Card */}
-              <div className="relative bg-[#0f0f0f] rounded-lg p-8 h-full border border-gray-700 shadow-xl transition group-hover:shadow-2xl">
-
-                <img src={item.icon} className="w-14 mb-5 opacity-90 group-hover:opacity-100 transition" />
+              <div className="relative bg-[#0f0f0f] rounded-lg p-8 border border-gray-700 shadow-xl">
+                <img src={item.icon} className="w-14 mb-5 opacity-90" />
 
                 <h3 className="text-xl font-semibold text-white">{item.title}</h3>
                 <p className="text-gray-300 mt-3">{item.desc}</p>
 
-                <a
-                  className="block mt-5 font-semibold text-cyan-300 hover:text-white transition"
-                  href="#"
+                <button
+                  onClick={() => setActive(i)}
+                  className="mt-5 font-semibold text-cyan-300 hover:text-white transition"
                 >
                   Learn more →
-                </a>
-
+                </button>
               </div>
             </motion.div>
           ))}
         </div>
-
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {active !== null && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 backdrop-blur-xl flex items-center justify-center z-[999]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              className="bg-[#0f0f0f] max-w-xl w-full mx-6 p-8 rounded-2xl border border-gray-700 shadow-2xl"
+            >
+              <h3 className="text-3xl font-bold text-white">{solutions[active].title}</h3>
+
+              <div className="mt-4">{solutions[active].details}</div>
+
+              <button
+                onClick={() => setActive(null)}
+                className="mt-8 px-5 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition"
+              >
+                Close
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
