@@ -1,0 +1,65 @@
+<svg width="480" height="360" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Outer Glow -->
+  <filter id="cloudGlow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="25" result="coloredBlur"/>
+    <feMerge>
+      <feMergeNode in="coloredBlur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+  <!-- Background soft halo -->
+  <ellipse cx="240" cy="250" rx="170" ry="45" fill="#00e5ff22" />
+
+  <!-- CLOUD SHAPE -->
+  <path
+    d="M120 210c-38-7-62-30-62-63s25-59 62-61c13-37 48-63 88-63s75 23 88 56c38 5 68 31 68 67s-30 70-81 70H120z"
+    fill="url(#deepBlueFill)"
+    stroke="url(#cyanStroke)"
+    stroke-width="4"
+    filter="url(#cloudGlow)"
+  />
+
+  <!-- Circuit dots (neon) -->
+  <g filter="url(#cloudGlow)">
+    <!-- 20 evenly spaced neon dots -->
+    <!-- you can adjust positions later to match your taste -->
+    <!-- top -->
+    <circle cx="180" cy="150" r="5" fill="#00eaff"/>
+    <circle cx="210" cy="140" r="5" fill="#00eaff"/>
+    <circle cx="240" cy="135" r="5" fill="#00eaff"/>
+    <circle cx="270" cy="140" r="5" fill="#00eaff"/>
+    <circle cx="300" cy="150" r="5" fill="#00eaff"/>
+
+    <!-- middle -->
+    <circle cx="165" cy="185" r="5" fill="#00eaff"/>
+    <circle cx="200" cy="175" r="5" fill="#00eaff"/>
+    <circle cx="230" cy="170" r="5" fill="#00eaff"/>
+    <circle cx="260" cy="175" r="5" fill="#00eaff"/>
+    <circle cx="295" cy="185" r="5" fill="#00eaff"/>
+
+    <!-- bottom -->
+    <circle cx="180" cy="215" r="5" fill="#00eaff"/>
+    <circle cx="210" cy="210" r="5" fill="#00eaff"/>
+    <circle cx="240" cy="208" r="5" fill="#00eaff"/>
+    <circle cx="270" cy="210" r="5" fill="#00eaff"/>
+    <circle cx="300" cy="215" r="5" fill="#00eaff"/>
+  </g>
+
+  <!-- DARK BLUE FILL GRADIENT -->
+  <defs>
+    <linearGradient id="deepBlueFill" x1="0" x2="1">
+      <stop offset="0%" stop-color="#002a66"/>
+      <stop offset="50%" stop-color="#003f88"/>
+      <stop offset="100%" stop-color="#0050a5"/>
+    </linearGradient>
+
+    <!-- CYAN NEON OUTLINE -->
+    <linearGradient id="cyanStroke" x1="0" x2="1">
+      <stop offset="0%" stop-color="#67e8ff"/>
+      <stop offset="100%" stop-color="#00eaff"/>
+    </linearGradient>
+  </defs>
+
+</svg>
