@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#050505] pt-24 pb-12 text-gray-300 overflow-hidden">
+    <footer id="footer" className="relative bg-[#050505] pt-24 pb-12 text-gray-300 overflow-hidden">
 
       {/* Glow Orbs */}
       <div className="pointer-events-none absolute inset-0">
