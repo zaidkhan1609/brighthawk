@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -17,204 +17,141 @@ export default function NavBar() {
   const [active, setActive] = useState("Home");
   const [scrolled, setScrolled] = useState(false);
 
-  // strictly typed refs for each desktop button
-  const linksRef = useRef<(HTMLButtonElement | null)[]>([]);
   const navContainerRef = useRef<HTMLDivElement | null>(null);
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
 
-  const [indicatorProps, setIndicatorProps] = useState({
-    left: 0,
-    width: 0,
-  });
-
-  // helper: update indicator from index (if element exists)
-  const updateIndicatorFromIndex = (index: number | null) => {
-    if (index === null) {
-      setIndicatorProps({ left: 0, width: 0 });
-      return;
-    }
-    const el = linksRef.current[index];
-    const container = navContainerRef.current;
-    if (!el || !container) return;
-
-    // compute left relative to nav container so absolute positioning works correctly
-    const elRect = el.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-    setIndicatorProps({
-      left: elRect.left - containerRect.left,
-      width: elRect.width,
-    });
-  };
-
-  // Scroll detection: highlights section on scroll
+  /** Scroll tracking */
   useEffect(() => {
-    const handler = () => {
-      const scrollPos = window.scrollY + 120;
+    const onScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = navLinks.filter((l) => l.href.startsWith("#"));
+      const scrollPos = window.scrollY + window.innerHeight / 3;
 
-      for (let sec of sections) {
-        const el = document.querySelector(sec.href) as HTMLElement | null;
-        if (!el) continue;
+      for (let link of navLinks) {
+        if (!link.href.startsWith("#")) continue;
+        const section = document.querySelector(link.href) as HTMLElement | null;
+        if (!section) continue;
 
-        const top = el.offsetTop;
-        const bottom = top + el.offsetHeight;
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
 
         if (scrollPos >= top && scrollPos < bottom) {
-          setActive(sec.label);
-          // update indicator to match the newly active label
-          const idx = navLinks.findIndex((n) => n.label === sec.label);
-          // slight defer to allow layout to stabilize
-          requestAnimationFrame(() => updateIndicatorFromIndex(idx));
-          break;
+          setActive(link.label);
+        }
+
+        if (link.href === "#footer") {
+          if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 50) {
+            setActive("Contact");
+          }
         }
       }
     };
 
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // move indicator when active changes (desktop)
+  /** Move underline */
   useEffect(() => {
-    const idx = navLinks.findIndex((link) => link.label === active);
-    // Slight delay so DOM paint finishes (helps when clicking then scrolling)
-    const raf = requestAnimationFrame(() => updateIndicatorFromIndex(idx));
-    return () => cancelAnimationFrame(raf);
+    const container = navContainerRef.current;
+    if (!container) return;
+
+    const index = navLinks.findIndex((l) => l.label === active);
+    const el = linkRefs.current[index];
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const crect = container.getBoundingClientRect();
+
+    setIndicator({
+      left: rect.left - crect.left,
+      width: rect.width,
+    });
   }, [active]);
 
-  // recompute on resize (keeps indicator aligned)
-  useEffect(() => {
-    const onResize = () => {
-      const idx = navLinks.findIndex((link) => link.label === active);
-      updateIndicatorFromIndex(idx === -1 ? null : idx);
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [active]);
+  const handleClick = (e: React.MouseEvent, index: number) => {
+    e.preventDefault();
+    const item = navLinks[index];
+    setActive(item.label);
+
+    const target = document.querySelector(item.href) as HTMLElement | null;
+    if (target) target.scrollIntoView({ behavior: "smooth" });
+
+    setOpen(false);
+  };
 
   return (
     <nav
-      className={`
-        fixed top-0 left-0 w-full z-50 transition-all duration-300
-        ${
-          scrolled
-            ? "backdrop-blur-xl bg-white/5 border-b border-white/10"
-            : "bg-transparent border-b border-transparent"
-        }
-      `}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "backdrop-blur-xl bg-white/5 border-b border-white/10"
+                 : "bg-transparent border-b border-transparent"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-        {/* LOGO IMAGE (Unchanged) */}
+      <div className="max-w-8xl mx-auto px-3 md:px-6 py-4 flex items-center justify-between">
+        
+        {/* LOGO */}
         <a href="/" className="flex items-center">
           <img
             src="/images/logo.png"
             alt="BrightHawk Logo"
-            className="h-14 w-auto md:h-16 object-contain"
+            className="h-12 w-auto md:h-24 object-contain"
           />
         </a>
 
-        {/* Desktop Menu */}
-        <div
-          ref={navContainerRef}
-          className="hidden md:flex items-center gap-10 relative"
-        >
-          {/* Underline Indicator */}
+        {/* DESKTOP NAV */}
+        <div ref={navContainerRef} className="hidden md:flex items-center gap-10 relative">
+
+          {/* Underline */}
           <motion.div
             className="absolute bottom-[-4px] h-[2.5px] bg-orange-400 rounded-full"
-            animate={{
-              left: indicatorProps.left,
-              width: indicatorProps.width,
-            }}
+            animate={{ left: indicator.left, width: indicator.width }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
           />
 
           {navLinks.map((item, i) => (
-            <button
+            <a
               key={item.label}
+              href={item.href}
               ref={(el) => {
-                linksRef.current[i] = el;
+                linkRefs.current[i] = el; // <-- FIXED (void return)
               }}
-              onClick={() => {
-                // set active immediately so color changes on click
-                setActive(item.label);
-
-                // scroll to target section if available
-                if (item.href.startsWith("#")) {
-                  const target = document.querySelector(item.href) as HTMLElement | null;
-                  if (target) {
-                    target.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }
-                }
-
-                // update indicator immediately based on clicked button
-                // use requestAnimationFrame to ensure measurements are correct
-                requestAnimationFrame(() => updateIndicatorFromIndex(i));
-              }}
-              className={`
-                text-sm font-medium transition relative pb-1
-                ${
-                  active === item.label
-                    ? "text-orange-400"
-                    : "text-gray-200 hover:text-orange-300"
-                }
-              `}
+              onClick={(e) => handleClick(e, i)}
+              className={`text-sm font-medium pb-1 transition ${
+                active === item.label
+                  ? "text-orange-400"
+                  : "text-gray-200 hover:text-orange-300"
+              }`}
             >
               {item.label}
-            </button>
+            </a>
           ))}
         </div>
 
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden text-white text-3xl"
-          onClick={() => setOpen(!open)}
-        >
+        {/* MOBILE MENU BUTTON */}
+        <button className="md:hidden text-white text-3xl" onClick={() => setOpen(!open)}>
           ☰
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden backdrop-blur-xl bg-black/40 border-t border-white/10 px-6 py-4 space-y-4"
-          >
-            {navLinks.map((item, idx) => (
-              <button
-                key={item.label}
-                onClick={() => {
-                  setActive(item.label);
-                  setOpen(false);
-                  if (item.href.startsWith("#")) {
-                    const target = document.querySelector(item.href) as HTMLElement | null;
-                    if (target) {
-                      target.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }
-                  }
-                  // in case user wants indicator updated after they open desktop later
-                  requestAnimationFrame(() => updateIndicatorFromIndex(idx));
-                }}
-                className={`
-                  block text-lg w-full text-left
-                  ${
-                    active === item.label
-                      ? "text-orange-400"
-                      : "text-gray-200"
-                  }
-                  hover:text-orange-300
-                `}
-              >
-                {item.label}
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* MOBILE MENU */}
+      {open && (
+        <div className="md:hidden backdrop-blur-xl bg-black/40 border-t border-white/10 px-6 py-4 space-y-4">
+          {navLinks.map((item, i) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={(e) => handleClick(e, i)}
+              className={`block text-lg ${
+                active === item.label ? "text-orange-400" : "text-gray-200"
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
