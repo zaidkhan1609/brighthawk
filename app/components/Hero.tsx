@@ -3,8 +3,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
+  const router = useRouter();
+
   return (
     <section
       id="home"
@@ -19,7 +22,7 @@ export default function Hero() {
       {/* === Content === */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 items-center">
 
-        {/* === IMAGE (mobile first) === */}
+        {/* === MOBILE IMAGE === */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 40 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -54,18 +57,36 @@ export default function Hero() {
             DevOps, custom software, and big data expertise.
           </p>
 
+          {/* === BUTTONS === */}
           <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-5">
-            <button className="px-8 py-3 rounded-lg text-black font-semibold bg-white shadow-md hover:bg-gray-200 transition">
+            <button
+              onClick={() => router.push("/explore")}
+              className="px-8 py-3 rounded-lg text-black font-semibold bg-white shadow-md hover:bg-gray-200 transition"
+            >
               Explore More
             </button>
 
-            <button className="px-8 py-3 rounded-lg border border-gray-600 text-white hover:bg-gray-900 transition">
+            <button
+              onClick={() =>
+                document.querySelector("#footer")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="px-8 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold hover:opacity-90 transition"
+            >
+              Get a Free Consultation
+            </button>
+
+            <button
+              onClick={() =>
+                document.querySelector("#footer")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="px-8 py-3 rounded-lg border border-gray-600 text-white hover:bg-gray-900 transition"
+            >
               Contact Us
             </button>
           </div>
         </motion.div>
 
-        {/* === IMAGE (desktop) === */}
+        {/* === DESKTOP IMAGE === */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 40 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -80,7 +101,6 @@ export default function Hero() {
             className="w-[85%] max-w-[450px] drop-shadow-[0_0_35px_rgba(255,255,255,0.15)]"
           />
         </motion.div>
-
       </div>
     </section>
   );
