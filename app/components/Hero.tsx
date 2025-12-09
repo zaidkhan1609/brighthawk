@@ -74,15 +74,6 @@ export default function Hero() {
             >
               Get a Free Consultation
             </button>
-
-            <button
-              onClick={() =>
-                document.querySelector("#footer")?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="px-8 py-3 rounded-lg border border-gray-600 text-white hover:bg-gray-900 transition"
-            >
-              Contact Us
-            </button>
           </div>
         </motion.div>
 

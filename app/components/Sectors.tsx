@@ -2,13 +2,34 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const sectors = [
-  { name: "Healthcare", color: "from-blue-500 to-cyan-400" },
-  { name: "E-Commerce", color: "from-purple-500 to-pink-500" },
-  { name: "IT & Software Development", color: "from-indigo-500 to-blue-600" },
-  { name: "Financial Services", color: "from-amber-500 to-orange-500" },
-  { name: "Media & Entertainment", color: "from-pink-500 to-red-500" },
+  {
+    name: "Healthcare",
+    color: "from-blue-500 to-cyan-400",
+    img: "/images/sectors/healthcare.png",
+  },
+  {
+    name: "E-Commerce",
+    color: "from-purple-500 to-pink-500",
+    img: "/images/sectors/ecommerce.png",
+  },
+  {
+    name: "IT & Software Development",
+    color: "from-indigo-500 to-blue-600",
+    img: "/images/sectors/software.png",
+  },
+  {
+    name: "Financial Services",
+    color: "from-amber-500 to-orange-500",
+    img: "/images/sectors/finance.png",
+  },
+  {
+    name: "Media & Entertainment",
+    color: "from-pink-500 to-red-500",
+    img: "/images/sectors/media.png",
+  },
 ];
 
 export default function Sectors() {
@@ -48,20 +69,31 @@ export default function Sectors() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="relative group rounded-lg p-[2px] bg-gradient-to-br from-gray-800 to-gray-900"
+              className="relative group rounded-xl p-[2px] bg-gradient-to-br from-gray-800 to-gray-900"
             >
 
               {/* Neon glow hover */}
               <div
-                className={`absolute inset-0 rounded-lg blur-xl opacity-0 group-hover:opacity-40 transition duration-500 bg-gradient-to-r ${sec.color}`}
-              ></div>
+                className={`absolute inset-0 rounded-xl blur-xl opacity-0 group-hover:opacity-40 transition duration-500 bg-gradient-to-r ${sec.color}`}
+              />
 
-              {/* Inner card */}
-              <div className="relative bg-[#0f0f0f] rounded-lg p-10 border border-gray-700 shadow-xl h-full flex items-center justify-center group-hover:shadow-2xl transition">
+              {/* Card Content */}
+              <div className="relative bg-[#0f0f0f] rounded-xl overflow-hidden border border-gray-700 shadow-xl group-hover:shadow-2xl transition">
 
-                <h3 className="text-xl font-semibold text-white text-center drop-shadow-sm">
-                  {sec.name}
-                </h3>
+                {/* BIG BANNER IMAGE */}
+                <div className="relative w-full h-56 md:h-64 overflow-hidden">
+                  <Image
+                    src={sec.img}
+                    alt={sec.name}
+                    fill
+                    className="object-cover group-hover:scale-110 transition duration-700"
+                  />
+                </div>
+
+                {/* TEXT */}
+                <div className="py-6 px-4">
+                  <h3 className="text-xl font-semibold text-white text-center">{sec.name}</h3>
+                </div>
 
               </div>
 
