@@ -71,9 +71,7 @@ export default function WhoWeAre() {
             long-term scalability and success.
           </p>
 
-          <button className="mt-8 px-8 py-3 rounded-3xl bg-white text-black font-semibold shadow-lg hover:bg-gray-200 transition">
-            Explore More
-          </button>
+          {/* 🚫 Removed Explore More Button */}
         </motion.div>
       </div>
     </section>
