@@ -17,8 +17,7 @@ export default function ExplorePage() {
         </h1>
 
         <p className="mt-6 text-gray-300 max-w-3xl mx-auto text-lg">
-          From idea to deployment, we help you design, build, and scale secure digital systems
-          tailored to your business.
+          {`From idea to deployment, we help you design, build, and scale secure digital systems tailored to your business.`}
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
@@ -42,7 +41,7 @@ export default function ExplorePage() {
       <section id="expertise" className="py-24 max-w-6xl mx-auto px-6">
         <h2 className="text-4xl font-bold text-center mb-6">What You Can Build With BrightHawk</h2>
         <p className="text-center text-gray-300 max-w-3xl mx-auto">
-          We combine DevOps, software engineering, and cloud expertise so you can launch and scale fast—without compromising on security or quality.
+          {`We combine DevOps, software engineering, and cloud expertise so you can launch and scale fast—without compromising on security or quality.`}
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 mt-14">
@@ -82,7 +81,7 @@ export default function ExplorePage() {
       <section className="py-24 max-w-6xl mx-auto px-6">
         <h2 className="text-4xl font-bold text-center mb-6">Our 5-Step Delivery Process</h2>
         <p className="text-center text-gray-300 max-w-3xl mx-auto">
-          Every project follows a clear, structured process so you always know what’s happening and what’s next.
+          {`Every project follows a clear, structured process so you always know what’s happening and what’s next.`}
         </p>
 
         <div className="mt-14 grid md:grid-cols-5 gap-8">
@@ -112,7 +111,7 @@ export default function ExplorePage() {
         <h2 className="text-4xl font-bold mb-6 text-center">Built for Startups & Growing Businesses</h2>
 
         <p className="max-w-3xl mx-auto text-center text-gray-300">
-          We're a focused engineering team that knows how to ship under constraints—budget, time, and resources.
+          {`We're a focused engineering team that knows how to ship under constraints—budget, time, and resources.`}
         </p>
 
         <ul className="mt-10 grid md:grid-cols-2 gap-4 text-gray-300 text-lg max-w-3xl mx-auto">
@@ -154,7 +153,7 @@ export default function ExplorePage() {
         </h2>
 
         <p className="text-gray-300 mt-4 text-lg">
-          Tell us what you're building or struggling with—we'll suggest a practical technical path forward.
+          {`Tell us what you're building or struggling with—we'll suggest a practical technical path forward.`}
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
@@ -173,6 +172,7 @@ export default function ExplorePage() {
           </a>
         </div>
       </section>
+
     </div>
   );
 }
