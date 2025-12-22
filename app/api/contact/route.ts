@@ -12,7 +12,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Transporter
+    /* ===============================
+       MAIL TRANSPORTER
+    =============================== */
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
       port: Number(process.env.MAIL_PORT),
@@ -23,116 +25,151 @@ export async function POST(req: Request) {
       },
     });
 
-    /* ===========================================================
-       AUTO-REPLY EMAIL TEMPLATE (sent to the CUSTOMER)
-    ============================================================ */
+    /* ===============================
+       CUSTOMER AUTO-REPLY (HTML)
+    =============================== */
+    const customerHtml = `
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:14px;overflow:hidden;">
 
-    const autoReplyHtml = `
-<div style="font-family: Arial, sans-serif; padding: 24px; background-color: #0a0a0a; color: #e5e5e5;">
+          <!-- HERO IMAGE -->
+          <tr>
+            <td>
+              <img
+                src="https://zaidkhan1609-brighthawk.vercel.app/email/email-hero.png"
+                alt="BrightHawk Technology Services"
+                width="600"
+                style="display:block;width:100%;height:auto;"
+              />
+            </td>
+          </tr>
 
-  <div style="text-align:center; margin-bottom: 20px;">
-    <img src="https://yourwebsite.com/images/logo.png" alt="BrightHawk"
-      style="width:160px; max-width:80%;" />
-  </div>
+          <!-- CONTENT -->
+          <tr>
+            <td style="padding:32px;color:#111;">
+              <p style="font-size:16px;">Hello <strong>${name}</strong>,</p>
 
-  <div style="
-      background: linear-gradient(to right, #ff7a1a, #ff4d4d, #c43dff);
-      padding: 18px;
-      border-radius: 10px;
-      text-align: center;
-      color: #000;
-      font-weight: bold;
-      font-size: 20px;
-      margin-bottom: 28px;">
-    Thanks for contacting BrightHawk!
-  </div>
+              <p style="font-size:15px;line-height:1.6;">
+                Thank you for contacting <strong>BrightHawk Info Tech Solution</strong>.
+                We’ve received your request for a <strong>free consultation</strong>.
+              </p>
 
-  <p style="font-size:16px; line-height:1.6;">
-    Hi <strong>${name}</strong>,
-    <br><br>
-    Thanks for reaching out. Your message has been received successfully, and our team
-    will get back to you shortly.
-  </p>
+              <p style="font-size:15px;line-height:1.6;">
+                One of our technical experts will review your requirements and
+                reach out to you within <strong>24 hours</strong>.
+              </p>
 
-  <p style="font-size:16px; line-height:1.6;">
-    Whether it's DevOps, Cloud, Software Development, or Big Data —
-    our engineers will respond soon with the best possible solution.
-  </p>
+              <div style="margin-top:18px;padding:14px;background:#f4f4f4;border-radius:8px;">
+                <p style="margin:0;font-size:14px;color:#333;">
+                  <strong>Your Message:</strong><br/>
+                  ${message}
+                </p>
+              </div>
+            </td>
+          </tr>
 
-  <div style="background-color:#111; padding:16px; border-radius:8px; margin-top:20px; border:1px solid #333;">
-    <p style="margin:0; font-size:14px; color:#bbb;">
-      <strong>Your Message:</strong><br>
-      "${message}"
-    </p>
-  </div>
+          <!-- SECOND IMAGE -->
+          <tr>
+            <td>
+              <img
+                src="https://zaidkhan1609-brighthawk.vercel.app/email/email-about.png"
+                alt="Why Choose BrightHawk"
+                width="600"
+                style="display:block;width:100%;height:auto;"
+              />
+            </td>
+          </tr>
 
-  <p style="margin-top:28px; font-size:15px; color:#ccc;">
-    – The BrightHawk Team
-  </p>
+          <!-- FOOTER -->
+          <tr>
+            <td style="padding:28px;color:#111;">
+              <p style="font-size:15px;">
+                If you have any urgent questions, simply reply to this email.
+              </p>
 
-  <hr style="border:0; border-top:1px solid #333; margin:30px 0;"/>
+              <p style="margin-top:24px;font-size:15px;">
+                Warm regards,<br/>
+                <strong>BrightHawk Info Tech Solution</strong>
+              </p>
 
-  <div style="font-size:13px; color:#888; text-align:center;">
-    <p>BrightHawk Infotech</p>
-    <p>East Wing, Office No.-120, Aurora Tower, MG Road, Camp, Pune - 411001</p>
-    <p>Email: brighthawkinfotech@gmail.com</p>
-    <p>Phone: +91 9370320860</p>
-  </div>
+              <p style="font-size:14px;color:#555;">
+                🌐 https://zaidkhan1609-brighthawk.vercel.app
+              </p>
+            </td>
+          </tr>
 
-</div>
+          <tr>
+            <td style="background:#f1f1f1;text-align:center;padding:12px;font-size:12px;color:#666;">
+              © 2024 BrightHawk Info Tech Solution
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
 `;
 
-    /* ===========================================================
-       OWNER NOTIFICATION TEMPLATE (sent to YOU)
-    ============================================================ */
-
+    /* ===============================
+       OWNER NOTIFICATION (HTML)
+    =============================== */
     const ownerHtml = `
-<div style="font-family: Arial, sans-serif; padding: 24px; background-color: #0a0a0a; color: #e5e5e5;">
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,Helvetica,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:14px;padding:28px;">
 
-  <div style="text-align:center; margin-bottom:20px;">
-    <img src="https://yourwebsite.com/images/logo.png" 
-         alt="BrightHawk Logo" style="width:150px; max-width:80%;" />
-  </div>
+          <h2 style="color:#ff7a1a;margin-top:0;">New Contact Form Submission</h2>
 
-  <h2 style="color:#ff7a1a; margin-bottom:10px;">New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
 
-  <p style="font-size:15px; line-height:1.6;">
-    You have received a new contact request from your website.
-  </p>
+          <div style="margin-top:16px;padding:14px;background:#f4f4f4;border-radius:8px;">
+            <p style="margin:0;"><strong>Message:</strong><br/>${message}</p>
+          </div>
 
-  <div style="margin-top:20px; padding:18px; background:#111; border-radius:10px; border:1px solid #333;">
-    <p style="margin:8px 0; font-size:14px;"><strong>Name:</strong> ${name}</p>
-    <p style="margin:8px 0; font-size:14px;"><strong>Email:</strong> ${email}</p>
-    <p style="margin:8px 0; font-size:14px;"><strong>Phone:</strong> ${phone || "Not provided"}</p>
-    <p style="margin:8px 0; font-size:14px;"><strong>Message:</strong><br>${message}</p>
-  </div>
+          <p style="margin-top:24px;font-size:14px;">
+            Please respond to this lead as soon as possible.
+          </p>
 
-  <p style="margin-top:24px; font-size:14px;">
-    Please respond to the user as soon as possible.
-  </p>
+          <hr style="border:none;border-top:1px solid #ddd;margin:24px 0;" />
 
-  <hr style="border:0; border-top:1px solid #333; margin:30px 0;" />
+          <p style="font-size:12px;color:#777;text-align:center;">
+            BrightHawk Info Tech Solution
+          </p>
 
-  <p style="font-size:13px; text-align:center; color:#777;">
-    BrightHawk – Modern Technology Solutions for Startups & Businesses
-  </p>
-
-</div>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
 `;
 
-    /* ===========================================================
+    /* ===============================
        SEND EMAILS
-    ============================================================ */
+    =============================== */
 
-    // Send to CUSTOMER
+    // Auto-reply to customer
     await transporter.sendMail({
-      from: `"BrightHawk" <${process.env.MAIL_USER}>`,
+      from: `"BrightHawk Info Tech Solution" <${process.env.MAIL_USER}>`,
       to: email,
-      subject: "Thanks for contacting BrightHawk!",
-      html: autoReplyHtml,
+      subject: "Thank You for Contacting BrightHawk – Free Consultation Confirmed",
+      html: customerHtml,
     });
 
-    // Send to OWNER
+    // Notify owner
     await transporter.sendMail({
       from: `"BrightHawk Website" <${process.env.MAIL_USER}>`,
       to: "brighthawkinfotech@gmail.com",
@@ -140,9 +177,12 @@ export async function POST(req: Request) {
       html: ownerHtml,
     });
 
-    return NextResponse.json({ success: true, message: "Emails sent successfully" });
-  } catch (err: any) {
-    console.error("Email error:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ success: true });
+  } catch (error: any) {
+    console.error("Contact API Error:", error);
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 }
+    );
   }
 }

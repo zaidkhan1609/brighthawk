@@ -2,13 +2,16 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function ExplorePage() {
+  const router = useRouter();
+
   return (
     <div className="bg-[#0a0a0a] text-white">
 
-      {/* SECTION 1 — Hero */}
-      <section className="py-24 max-w-6xl mx-auto px-6 text-center">
+      {/* SECTION 1 — Hero (extra top spacing added) */}
+      <section className="pt-40 pb-24 max-w-6xl mx-auto px-6 text-center">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight">
           Explore How BrightHawk Builds <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">
@@ -20,13 +23,14 @@ export default function ExplorePage() {
           {`From idea to deployment, we help you design, build, and scale secure digital systems tailored to your business.`}
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-          <a
-            href="#footer"
+        <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+          {/* UPDATED BUTTON */}
+          <button
+            onClick={() => router.push("/?consultation=true")}
             className="px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-orange-500 to-pink-500 text-black hover:opacity-90"
           >
             Get a Free Consultation
-          </a>
+          </button>
 
           <a
             href="#expertise"
@@ -39,7 +43,9 @@ export default function ExplorePage() {
 
       {/* SECTION 2 — Core Expertise */}
       <section id="expertise" className="py-24 max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-6">What You Can Build With BrightHawk</h2>
+        <h2 className="text-4xl font-bold text-center mb-6">
+          What You Can Build With BrightHawk
+        </h2>
         <p className="text-center text-gray-300 max-w-3xl mx-auto">
           {`We combine DevOps, software engineering, and cloud expertise so you can launch and scale fast—without compromising on security or quality.`}
         </p>
@@ -79,7 +85,9 @@ export default function ExplorePage() {
 
       {/* SECTION 3 — Delivery Process */}
       <section className="py-24 max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-6">Our 5-Step Delivery Process</h2>
+        <h2 className="text-4xl font-bold text-center mb-6">
+          Our 5-Step Delivery Process
+        </h2>
         <p className="text-center text-gray-300 max-w-3xl mx-auto">
           {`Every project follows a clear, structured process so you always know what’s happening and what’s next.`}
         </p>
@@ -99,7 +107,9 @@ export default function ExplorePage() {
               transition={{ delay: i * 0.1 }}
               className="p-6 rounded-xl bg-[#0f0f0f] border border-gray-800 text-center"
             >
-              <h3 className="text-xl font-semibold mb-4">Step {i + 1}</h3>
+              <h3 className="text-xl font-semibold mb-4">
+                Step {i + 1}
+              </h3>
               <p className="text-gray-300">{step}</p>
             </motion.div>
           ))}
@@ -108,7 +118,9 @@ export default function ExplorePage() {
 
       {/* SECTION 4 — Who We Work With */}
       <section className="py-24 max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-bold mb-6 text-center">Built for Startups & Growing Businesses</h2>
+        <h2 className="text-4xl font-bold mb-6 text-center">
+          Built for Startups & Growing Businesses
+        </h2>
 
         <p className="max-w-3xl mx-auto text-center text-gray-300">
           {`We're a focused engineering team that knows how to ship under constraints—budget, time, and resources.`}
@@ -124,7 +136,9 @@ export default function ExplorePage() {
 
       {/* SECTION 5 — Why Choose Us */}
       <section className="py-24 max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center">Why BrightHawk?</h2>
+        <h2 className="text-4xl font-bold text-center">
+          Why BrightHawk?
+        </h2>
 
         <div className="grid md:grid-cols-2 gap-12 mt-14">
           {[
@@ -149,7 +163,8 @@ export default function ExplorePage() {
       {/* SECTION 6 — Final CTA */}
       <section className="py-24 text-center max-w-4xl mx-auto px-6">
         <h2 className="text-4xl font-bold">
-          Ready to Explore <span className="text-orange-500">Working With Us?</span>
+          Ready to Explore{" "}
+          <span className="text-orange-500">Working With Us?</span>
         </h2>
 
         <p className="text-gray-300 mt-4 text-lg">
@@ -157,12 +172,13 @@ export default function ExplorePage() {
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-          <a
-            href="#footer"
+          {/* UPDATED BUTTON */}
+          <button
+            onClick={() => router.push("/?consultation=true")}
             className="px-10 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 font-semibold hover:opacity-90"
           >
             Get a Free Consultation
-          </a>
+          </button>
 
           <a
             href="mailto:info@brighthawk.com"

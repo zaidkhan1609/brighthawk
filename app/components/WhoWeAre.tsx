@@ -10,13 +10,13 @@ export default function WhoWeAre() {
       id="who-we-are"
       className="relative bg-[#000] py-24 md:py-32 overflow-hidden"
     >
-      {/* === ORANGE DECORATIVE SHAPES === */}
-      <div className="absolute top-10 left-0 w-40 h-40 md:w-56 md:h-56 bg-orange-500 rounded-br-[60px] md:rounded-br-[80px]" />
-      <div className="absolute bottom-10 right-0 w-40 h-40 md:w-56 md:h-56 bg-orange-500 rounded-tl-[60px] md:rounded-tl-[80px]" />
+      {/* === ORANGE DECORATIVE SHAPES (SHORTENED & OFFSET) === */}
+      <div className="absolute top-6 left-0 w-28 h-28 md:w-40 md:h-40 bg-orange-500 rounded-br-[50px] md:rounded-br-[60px]" />
+      <div className="absolute bottom-6 right-0 w-28 h-28 md:w-40 md:h-40 bg-orange-500 rounded-tl-[50px] md:rounded-tl-[60px]" />
 
       {/* === MAIN GRID === */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-
+        
         {/* === IMAGE BLOCK === */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -25,7 +25,6 @@ export default function WhoWeAre() {
           transition={{ duration: 0.8 }}
           className="relative"
         >
-          {/* Rounded photo card */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#222]">
             <Image
               src="/images/team-working.jpg"
@@ -70,8 +69,6 @@ export default function WhoWeAre() {
             tailor-made solutions addressing unique challenges while ensuring
             long-term scalability and success.
           </p>
-
-          {/* 🚫 Removed Explore More Button */}
         </motion.div>
       </div>
     </section>
