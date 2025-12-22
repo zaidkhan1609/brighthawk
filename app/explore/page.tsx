@@ -20,12 +20,10 @@ export default function ExplorePage() {
         </h1>
 
         <p className="mt-6 text-gray-300 max-w-3xl mx-auto text-lg">
-          From idea to deployment, we help you design, build, and scale secure
-          digital systems tailored to your business.
+          {`From idea to deployment, we help you design, build, and scale secure digital systems tailored to your business.`}
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-          {/* ✅ OPEN GLOBAL MODAL */}
           <button
             onClick={openModal}
             className="px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-orange-500 to-pink-500 text-black hover:opacity-90"
@@ -49,27 +47,30 @@ export default function ExplorePage() {
         </h2>
 
         <p className="text-center text-gray-300 max-w-3xl mx-auto">
-          We combine DevOps, software engineering, and cloud expertise so you can
-          launch and scale fast—without compromising on security or quality.
+          {`We combine DevOps, software engineering, and cloud expertise so you can launch and scale fast without compromising on security or quality.`}
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 mt-14">
           {[
             {
               title: "DevOps & Cloud Engineering",
-              desc: "Automated CI/CD, containerization, IaC, monitoring, and high-availability environments.",
+              desc:
+                "Automated CI/CD, containerization, IaC, monitoring, and high-availability environments.",
             },
             {
               title: "Custom Software Development",
-              desc: "Web platforms, backend systems, and internal tools built with clean scalable architecture.",
+              desc:
+                "Web platforms, backend systems, and internal tools built with clean scalable architecture.",
             },
             {
               title: "Data & Analytics",
-              desc: "Pipelines, processing, big-data storage, dashboards, and insights for decision making.",
+              desc:
+                "Pipelines, processing, big-data storage, dashboards, and insights for decision making.",
             },
             {
               title: "Web & App Development",
-              desc: "Modern, responsive, high-performance frontend and full-stack applications.",
+              desc:
+                "Modern, responsive, high-performance frontend and full-stack applications.",
             },
           ].map((card, i) => (
             <motion.div
@@ -93,8 +94,7 @@ export default function ExplorePage() {
         </h2>
 
         <p className="text-center text-gray-300 max-w-3xl mx-auto">
-          Every project follows a clear, structured process so you always know
-          what’s happening and what’s next.
+          {`Every project follows a clear, structured process so you always know what is happening and what comes next.`}
         </p>
 
         <div className="mt-14 grid md:grid-cols-5 gap-8">
@@ -128,15 +128,14 @@ export default function ExplorePage() {
         </h2>
 
         <p className="max-w-3xl mx-auto text-center text-gray-300">
-          We're a focused engineering team that knows how to ship under
-          constraints—budget, time, and resources.
+          {`We are a focused engineering team that knows how to ship under constraints such as budget, time, and resources.`}
         </p>
 
         <ul className="mt-10 grid md:grid-cols-2 gap-4 text-gray-300 text-lg max-w-3xl mx-auto">
           <li>• Startups building their first MVP</li>
           <li>• SMEs modernizing legacy systems</li>
-          <li>• Product companies needing backend & DevOps</li>
-          <li>• Businesses moving to cloud-native infra</li>
+          <li>• Product companies needing backend and DevOps</li>
+          <li>• Businesses moving to cloud-native infrastructure</li>
         </ul>
       </section>
 
@@ -148,10 +147,10 @@ export default function ExplorePage() {
 
         <div className="grid md:grid-cols-2 gap-12 mt-14">
           {[
-            "Small Expert Team – You work directly with engineers.",
-            "Security-First Approach – Designed for reliability from day one.",
-            "Startup-Friendly – Flexible and cost-effective.",
-            "Real-World Experience – Built production systems across industries.",
+            "Small expert team – you work directly with engineers.",
+            "Security-first approach – designed for reliability from day one.",
+            "Startup-friendly – flexible and cost-effective.",
+            "Real-world experience – production systems across industries.",
           ].map((point, i) => (
             <motion.div
               key={i}
@@ -174,12 +173,10 @@ export default function ExplorePage() {
         </h2>
 
         <p className="text-gray-300 mt-4 text-lg">
-          Tell us what you're building or struggling with—we'll suggest a
-          practical technical path forward.
+          {`Tell us what you are building or struggling with and we will suggest a practical technical path forward.`}
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-          {/* ✅ SAME MODAL */}
           <button
             onClick={openModal}
             className="px-10 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 font-semibold hover:opacity-90"
