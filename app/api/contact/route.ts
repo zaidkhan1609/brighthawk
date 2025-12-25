@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { connectDB } from "@/lib/mongodb";
+import Contact from "@/models/Contact";
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +15,13 @@ export async function POST(req: Request) {
     }
 
     /* ===============================
-       MAIL TRANSPORTER
+       SAVE TO MONGODB
+    =============================== */
+    await connectDB();
+    await Contact.create({ name, email, phone, message });
+
+    /* ===============================
+       MAIL TRANSPORTER (HOSTINGER)
     =============================== */
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
@@ -26,7 +34,7 @@ export async function POST(req: Request) {
     });
 
     /* ===============================
-       CUSTOMER AUTO-REPLY (HTML)
+       CUSTOMER AUTO-REPLY (UNCHANGED)
     =============================== */
     const customerHtml = `
 <!DOCTYPE html>
@@ -37,7 +45,6 @@ export async function POST(req: Request) {
       <td align="center">
         <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:14px;overflow:hidden;">
 
-          <!-- HERO IMAGE -->
           <tr>
             <td>
               <img
@@ -49,7 +56,6 @@ export async function POST(req: Request) {
             </td>
           </tr>
 
-          <!-- CONTENT -->
           <tr>
             <td style="padding:32px;color:#111;">
               <p style="font-size:16px;">Hello <strong>${name}</strong>,</p>
@@ -73,7 +79,6 @@ export async function POST(req: Request) {
             </td>
           </tr>
 
-          <!-- SECOND IMAGE -->
           <tr>
             <td>
               <img
@@ -85,7 +90,6 @@ export async function POST(req: Request) {
             </td>
           </tr>
 
-          <!-- FOOTER -->
           <tr>
             <td style="padding:28px;color:#111;">
               <p style="font-size:15px;">
@@ -118,7 +122,7 @@ export async function POST(req: Request) {
 `;
 
     /* ===============================
-       OWNER NOTIFICATION (HTML)
+       OWNER NOTIFICATION (UNCHANGED)
     =============================== */
     const ownerHtml = `
 <!DOCTYPE html>
@@ -160,8 +164,6 @@ export async function POST(req: Request) {
     /* ===============================
        SEND EMAILS
     =============================== */
-
-    // Auto-reply to customer
     await transporter.sendMail({
       from: `"BrightHawk Info Tech Solution" <${process.env.MAIL_USER}>`,
       to: email,
@@ -169,19 +171,18 @@ export async function POST(req: Request) {
       html: customerHtml,
     });
 
-    // Notify owner
     await transporter.sendMail({
       from: `"BrightHawk Website" <${process.env.MAIL_USER}>`,
-      to: "brighthawkinfotech@gmail.com",
+      to: process.env.MAIL_USER!,
       subject: "New Contact Form Submission",
       html: ownerHtml,
     });
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Contact API Error:", error);
     return NextResponse.json(
-      { error: "Failed to send email" },
+      { error: "Failed to process contact form" },
       { status: 500 }
     );
   }
